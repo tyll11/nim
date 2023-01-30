@@ -68,14 +68,14 @@ public class Game{
         if(Board.remainingPieces == 1){
             if(move % 2 == 0){
                 player2Score++;
-                System.out.println(player1Name + " Wins.");
+                System.out.println(player2Name + " Wins.");
                 System.out.println(player1Name + "'s Score: " + player1Score);
                 System.out.println(player2Name + "'s Score: " + player2Score);
                 playAgain();
             }
             else{
                 player1Score++;
-                System.out.println(player2Name + " Wins.");
+                System.out.println(player1Name + " Wins.");
                 System.out.println(player1Name + "'s Score: " + player1Score);
                 System.out.println(player2Name + "'s Score: " + player2Score);
                 playAgain();
