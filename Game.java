@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.InputMismatchException;
+// import java.util.InputMismatchException;
 import java.util.Random;
 
 public class Game{
@@ -14,6 +14,8 @@ public class Game{
     private int player2Score = 0;
     private String player1Name;
     private String player2Name;
+    private int bestOf;
+    private int number;
     public Game(int s){
         startGame();
     }
@@ -21,11 +23,13 @@ public class Game{
      
   
        System.out.println("How many pieces do you want the game to start with? Must be between 10 - 50");
-        int number = a.nextInt();
-        System.out.println(move);
+        number = a.nextInt();
+        System.out.print("Best of: ");
+        bestOf = a.nextInt();
         while(number > 50 || number < 10){
             System.out.println("Not a valid number, try again.");
             number = a.nextInt();
+            
         }
             Board.populate(number);
             System.out.println("Enter player 1 name: ");
@@ -39,14 +43,24 @@ public class Game{
     }
 
     public void playAgain(){
-        String answer = "";
-        System.out.println("Would you like to play again? yes or no");
-        answer = a.next();
-        // System.out.println(answer);
-        if(answer.equals("yes")){
+       
+        if(player1Score > (.5 * bestOf) || player2Score > (.5 * bestOf)){
+            String answer = "";
+            System.out.println("Would you like to play again? yes or no");
+            answer = a.next();
+            // System.out.println(answer);
+            if(answer.equals("yes")){
 
-            startGame();
+                startGame();
+            }
         }
+        
+        else{
+       System.out.println("Next round starting with "+ number + " pieces.");
+        Board.populate(number);
+        askMove();
+    }
+    
     }
     public void askMove(){
         int userInput;
@@ -91,9 +105,9 @@ public class Game{
             else{
                 
                 System.out.print(player2Name+ "'s Move: " );
-                a.nextInt();
+        
                 userInput = a.nextInt();   
-                if( userInput <= .5 * Board.getPieces()){
+                if(userInput <= .5 * Board.getPieces()){
                     Board.subtractPieces(userInput);
                     System.out.println("Remaining: " + Board.remainingPieces);
                     move += 1;
